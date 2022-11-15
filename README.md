@@ -32,7 +32,7 @@ TODO: add commands to change microstepping mode
 TODO: maybe constrain set values to the range MIN-MAX.
 
 | command                  | action                             | default | min | max |
-|--------------------------|------------------------------------|---------------------|
+|--------------------------|------------------------------------|---------|-----|-----|
 | :MOTor:SPeed?            | returns top speed in steps/s       |         |     |     |
 | :MOTor:SPeed $val        | sets top speed to $val steps/s     | 200     | 10  | 800 |
 | :MOTor:ACCeleration?     | returns acceleration in steps/s²   |         |     |     |
