@@ -1,3 +1,9 @@
+// SPDX-License-Identifier: MIT
+/*
+ * Firmware for Arduino + A4988 stepper motor controller board
+ * Copyright (c) 2022, Jonas Grage <grage@physik.tu-berlin.de>
+ */
+ 
 #include <avr/wdt.h>
 #include <util/delay.h>
 #include <Arduino.h>
@@ -117,7 +123,6 @@ void loop(){
             UPDATE_FLAG = 0;
         }
         
-        // debug printing
         if (response_len > 0) // hier wäre response_len klüger
             {
                 Serial.write(response_buffer, response_len);

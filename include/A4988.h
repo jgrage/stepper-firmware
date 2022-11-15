@@ -1,6 +1,8 @@
-//#include <avr/io.h>
-//#include <avr/interrupt.h>
-//#include <math.h>
+/* SPDX-License-Identifier: MIT */
+/*
+ * Allegro A4988 stepper driver functions
+ * Copyright (c) 2022, Jonas Grage <grage@physik.tu-berlin.de>
+ */
 
 #ifndef A4988_H
 #define A4988_H

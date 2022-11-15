@@ -1,3 +1,9 @@
+// SPDX-License-Identifier: MIT
+/*
+ * SCPI functions for stepper motor controller
+ * Copyright (c) 2022, Jonas Grage <grage@physik.tu-berlin.de>
+ */
+ 
 #include <scpiparser.h>
 #include "scpi_functions.h"
 #include "A4988.h"
@@ -112,7 +118,6 @@ scpi_error_t scpi_move_relative(struct scpi_parser_context* context, struct scpi
 		error.id = -301;
 		error.description = "Command error: Position below negative softlimit";
 		error.length = 48;
-		//response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
 		scpi_queue_error(&ctx, error);
 		scpi_free_tokens(command);
 		return SCPI_SUCCESS;
@@ -123,7 +128,6 @@ scpi_error_t scpi_move_relative(struct scpi_parser_context* context, struct scpi
 		error.id = -302;
 		error.description = "Command error: Position above positive softlimit";
 		error.length = 48;
-		//response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
 		scpi_queue_error(&ctx, error);
 		scpi_free_tokens(command);
 		return SCPI_SUCCESS;
@@ -142,7 +146,6 @@ scpi_error_t scpi_move_relative(struct scpi_parser_context* context, struct scpi
     error.id = -200;
     error.description = "Command error: Invalid unit";
     error.length = 27;
-    //response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
     scpi_queue_error(&ctx, error);
     scpi_free_tokens(command);
     return SCPI_SUCCESS;
@@ -176,7 +179,6 @@ scpi_error_t scpi_move_absolute(struct scpi_parser_context* context, struct scpi
 		error.id = -301;
 		error.description = "Command error: Position below negative softlimit";
 		error.length = 48;
-		//response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
 		scpi_queue_error(&ctx, error);
 		scpi_free_tokens(command);
 		return SCPI_SUCCESS;
@@ -187,7 +189,6 @@ scpi_error_t scpi_move_absolute(struct scpi_parser_context* context, struct scpi
 		error.id = -302;
 		error.description = "Command error: Position above positive softlimit";
 		error.length = 48;
-		//response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
 		scpi_queue_error(&ctx, error);
 		scpi_free_tokens(command);
 		return SCPI_SUCCESS;
@@ -206,7 +207,6 @@ scpi_error_t scpi_move_absolute(struct scpi_parser_context* context, struct scpi
     error.id = -200;
     error.description = "Command error: Invalid unit";
     error.length = 27;
-    //response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
     scpi_queue_error(&ctx, error);
     scpi_free_tokens(command);
     return SCPI_SUCCESS;
@@ -226,21 +226,18 @@ scpi_error_t scpi_set_acceleration(struct scpi_parser_context* context, struct s
   }
 
   float output_value;
-  output_numeric = scpi_parse_numeric(args->value, args->length, 50, 10, 200);
+  output_numeric = scpi_parse_numeric(args->value, args->length, 100, 10, 400);
   
   if(output_numeric.length == 0){
     output_value = output_numeric.value;
 
   }
-  
-  //ToDo: Add scale factor and unit
 
   else{
     scpi_error error;
     error.id = -200;
     error.description = "Command error: Invalid unit";
     error.length = 27;
-    //response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
     scpi_queue_error(&ctx, error);
     scpi_free_tokens(command);
     return SCPI_SUCCESS;
@@ -264,7 +261,7 @@ scpi_error_t scpi_set_deceleration(struct scpi_parser_context* context, struct s
   }
 
   float output_value;
-  output_numeric = scpi_parse_numeric(args->value, args->length, 0, 0, 5);
+  output_numeric = scpi_parse_numeric(args->value, args->length, 100, 10, 400);
   
   if(output_numeric.length == 0){
     output_value = output_numeric.value;
@@ -275,7 +272,6 @@ scpi_error_t scpi_set_deceleration(struct scpi_parser_context* context, struct s
     error.id = -200;
     error.description = "Command error: Invalid unit";
     error.length = 27;
-    //response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
     scpi_queue_error(&ctx, error);
     scpi_free_tokens(command);
     return SCPI_SUCCESS;
@@ -299,7 +295,7 @@ scpi_error_t scpi_set_max_speed(struct scpi_parser_context* context, struct scpi
   }
 
   float output_value;
-  output_numeric = scpi_parse_numeric(args->value, args->length, get_speed_limit(), 100, 800);
+  output_numeric = scpi_parse_numeric(args->value, args->length, 200, 10, 800);
   
   if(output_numeric.length == 0){
     output_value = output_numeric.value;
@@ -310,7 +306,6 @@ scpi_error_t scpi_set_max_speed(struct scpi_parser_context* context, struct scpi
     error.id = -200;
     error.description = "Command error: Invalid unit";
     error.length = 27;
-    //response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
     scpi_queue_error(&ctx, error);
     scpi_free_tokens(command);
     return SCPI_SUCCESS;
@@ -345,7 +340,6 @@ scpi_error_t scpi_set_softlimit_pos(struct scpi_parser_context* context, struct 
     error.id = -200;
     error.description = "Command error: Invalid unit";
     error.length = 27;
-    //response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
     scpi_queue_error(&ctx, error);
     scpi_free_tokens(command);
     return SCPI_SUCCESS;
@@ -380,7 +374,6 @@ scpi_error_t scpi_set_softlimit_neg(struct scpi_parser_context* context, struct 
     error.id = -200;
     error.description = "Command error: Invalid unit";
     error.length = 27;
-    //response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
     scpi_queue_error(&ctx, error);
     scpi_free_tokens(command);
     return SCPI_SUCCESS;
@@ -416,7 +409,6 @@ scpi_error_t scpi_set_position(struct scpi_parser_context* context, struct scpi_
     error.id = -200;
     error.description = "Command error: Invalid unit";
     error.length = 27;
-    //response_len = snprintf(response_buffer, BUF_LEN, "%d->%s\n", error.id, error.description);
     scpi_queue_error(&ctx, error);
     scpi_free_tokens(command);
     return SCPI_SUCCESS;
@@ -452,7 +444,7 @@ scpi_error_t scpi_get_state(struct scpi_parser_context* context, struct scpi_tok
     else{
         switch_state_t tmp = get_switch_state();
         
-        if(tmp == NORMAL){
+        if(tmp == FREE){
             response_len = snprintf(response_buffer, BUF_LEN, "STOPPED\n");
         }
         
@@ -472,13 +464,6 @@ scpi_error_t scpi_get_state(struct scpi_parser_context* context, struct scpi_tok
     scpi_free_tokens(command);
     return SCPI_SUCCESS;
 }
-
-
-
-
-
-
-
 
 /**
  * 

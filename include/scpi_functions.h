@@ -1,3 +1,9 @@
+/* SPDX-License-Identifier: MIT */
+/*
+ * SCPI functions for stepper motor controller
+ * Copyright (c) 2022, Jonas Grage <grage@physik.tu-berlin.de>
+ */
+ 
 #include <scpiparser.h>
 
 #ifndef SCPI_FUNCTIONS_H

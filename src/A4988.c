@@ -1,3 +1,9 @@
+// SPDX-License-Identifier: MIT
+/*
+ * Allegro A4988 stepper driver functions
+ * Copyright (c) 2022, Jonas Grage <grage@physik.tu-berlin.de>
+ */
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <math.h>
@@ -37,10 +43,6 @@ volatile uint32_t steps_to_decelerate;
 volatile int32_t MICROSTEPS_CNT = 0;	//integer value of current position in 1/16 steps (minimum microstepping)
 extern volatile uint8_t UPDATE_FLAG;
 
-// debug printing
-//#define BUF_LEN 128
-//extern char response_buffer[BUF_LEN];
-//extern uint8_t response_len;
 
 /*
  * Setup Timer1 for Compare Match ISR
@@ -254,15 +256,11 @@ void update_state(){
             RUN = NORMAL; //return to default limit switch operation
         }*/
     }
-    
-    //response_len = snprintf(response_buffer, BUF_LEN, "%d\t%d\t%d\n", pos, neg, SW_STATE);
 }
 
 
-
-
 /*
- * Return the current position in full steps. ToDo: MAYBE SAVE SCALE FACTOR AND RETURN ACTUAL UNIT
+ * Return the current position in full steps
  */
 float get_position(){
 	return (float)(MICROSTEPS_CNT/16.0);
@@ -289,17 +287,6 @@ void move_relative(float distance){
     run();
     STATE = MOVING;
 }
-    
-/*
-void home_run_pos(){
-    RUN = HOME_RUN_POS;
-    move_relative(2000000000.0);
-}
-
-void home_run_neg(){
-    RUN = HOME_RUN_NEG;
-    move_relative(-2000000000.0);
-}*/
 
 void set_max_speed(uint16_t max_speed){
 	speed_limit = max_speed;
