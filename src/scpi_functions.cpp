@@ -25,7 +25,7 @@ scpi_error_t identify(struct scpi_parser_context* context, struct scpi_token* co
  * 
  */
 scpi_error_t scpi_get_position(struct scpi_parser_context* context, struct scpi_token* command){
-  response_len = snprintf(response_buffer, BUF_LEN, "%.2f\n", get_position());
+  response_len = snprintf(response_buffer, BUF_LEN, "%.2f\n", (double)(get_position()));
   scpi_free_tokens(command);
   return SCPI_SUCCESS;
 }
@@ -52,7 +52,7 @@ scpi_error_t scpi_get_deceleration(struct scpi_parser_context* context, struct s
  * 
  */
 scpi_error_t scpi_get_softlimit_neg(struct scpi_parser_context* context, struct scpi_token* command){
-  response_len = snprintf(response_buffer, BUF_LEN, "%.2f\n", softlimit_neg);
+  response_len = snprintf(response_buffer, BUF_LEN, "%.2f\n", (double)(softlimit_neg));
   scpi_free_tokens(command);
   return SCPI_SUCCESS;
 }
@@ -61,7 +61,7 @@ scpi_error_t scpi_get_softlimit_neg(struct scpi_parser_context* context, struct 
  * 
  */
 scpi_error_t scpi_get_softlimit_pos(struct scpi_parser_context* context, struct scpi_token* command){
-  response_len = snprintf(response_buffer, BUF_LEN, "%.2f\n", softlimit_pos);
+  response_len = snprintf(response_buffer, BUF_LEN, "%.2f\n", (double)(softlimit_pos));
   scpi_free_tokens(command);
   return SCPI_SUCCESS;
 }
