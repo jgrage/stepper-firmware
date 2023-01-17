@@ -16,7 +16,7 @@ float softlimit_neg = INT_MIN;
  * Respond to *IDN?
  */
 scpi_error_t identify(struct scpi_parser_context* context, struct scpi_token* command){
-  response_len = snprintf(response_buffer, BUF_LEN, "BLiX Stepper Motor Controller rev. 0.1\n");
+  response_len = snprintf(response_buffer, BUF_LEN, "BLiX Stepper Motor Controller rev. 1.0\n");
   scpi_free_tokens(command);
   return SCPI_SUCCESS;
 }
